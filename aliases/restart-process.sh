@@ -7,7 +7,11 @@ if [ "$1" ]
     executablePathDos=$(echo "$executablePathUnix" | tr -d '"')
     executablePathDos="$($currentDirectory/find-replace.sh \\ \\\\ $executablePathDos)"
     executablePathDos="$($currentDirectory/find-replace.sh \\\& \\\\\& $executablePathDos)"
-    executablePathDosEscaped="$($currentDirectory/find-replace.sh \\/ \\\\/ $executablePathDos)"
+    executablePathDos="$($currentDirectory/find-replace.sh \\/ \\\\/ $executablePathDos)"
+    executablePathDos=$(printf "%q" $executablePathDos)
+    executablePathDos="$($currentDirectory/find-replace.sh \  - $executablePathDos)"
+    executablePathDosEscaped="$($currentDirectory/find-replace.sh -  \\  $executablePathDos)"
+
     ECHO $executablePathUnix
     ECHO $executablePathDos
     ECHO $executablePathDosEscaped

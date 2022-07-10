@@ -1,11 +1,17 @@
-mkdir $1
-cd $1
+#!/bin/bash
+if [ "$1" ]
+  then
+    currentDirectory=$HOME/bashrc/aliases
+    pycharm=$currentDirectory/pycharm.sh    
 
-mkdir -p src/main/
-mkdir -p src/test/
+    mkdir $1
+    cd $1
 
-touch src/main/main_application.py
-touch src/test/main_application_test.py
+    mkdir -p src/main/
+    mkdir -p src/test/
 
-echo "My Project Description!" > README.md
-start pycharm $1
+    touch src/main/main_application.py
+    touch src/test/main_application_test.py
+
+    echo "My Project Description!" > README.md
+fi

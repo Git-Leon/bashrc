@@ -1,4 +1,4 @@
 #!/bin/bash
 builtin cd $1
 pwd
-ls
+ls -a

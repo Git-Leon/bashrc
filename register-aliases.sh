@@ -25,5 +25,6 @@ alias pycharm='$aliases/pycharm.sh' $1
 alias gitbash='$aliases/gitbash.sh & exit'
 alias idea='$aliases/idea.sh' $1
 alias convert-path=$aliases/convert-path.sh $1
+alias find-replace=$aliases/find-replace.sh $1 $2 $3
 
 alias

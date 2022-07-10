@@ -2,12 +2,6 @@
 ECHO Registering aliases...
 aliases=~/bashrc/aliases
 
-scriptWorkingDirectory() {
-    echo YER
-    SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-    ECHO $SWD
-}
-
 alias cd='. $aliases/change-directory.sh $1'
 alias cd-temp='. $aliases/change-directory.sh ~/dev/.tmp'
 alias convert-path='$aliases/convert-path.sh'

@@ -17,6 +17,7 @@ alias create-project.python=$aliases/create-python-project.sh $1
 alias mvn.version=$aliases/mvn.project-version.sh
 alias mvn.package=$aliases/mvn.package.sh
 alias pc.deploy=$aliases/package_cloud.deploy.sh
+alias get-process=$aliases/get-process.sh
 alias kill-port=$aliases/kill-port.sh $1
 alias kill-process=$aliases/kill-process.sh $1
 alias restart-process=$aliases/restart-process.sh $1

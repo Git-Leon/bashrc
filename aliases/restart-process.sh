@@ -2,7 +2,8 @@
 if [ "$1" ]
   then
     currentDirectory=$HOME/bashrc/aliases
-    script=$currentDirectory/batch/restart-process.bat    
+    restartScript=$currentDirectory/batch/restart-process.bat    
+    killScript=$($currentDirectory/kill-process.sh $1)
     executablePathUnix="$($currentDirectory/batch/get-process-executable-path.bat $1)"
     executablePathDos=$(echo "$executablePathUnix" | tr -d '"')
     executablePathDos="$($currentDirectory/find-replace.sh \\ \\\\ $executablePathDos)"
@@ -15,6 +16,7 @@ if [ "$1" ]
     ECHO $executablePathUnix
     ECHO $executablePathDos
     ECHO $executablePathDosEscaped
-    cmd "/C $($currentDirectory/convert-path.sh $script) $1"
+    cmd "/C $($currentDirectory/convert-path.sh $restartScript) $1"
+    $killScript
     $executablePathDosEscaped &
   fi

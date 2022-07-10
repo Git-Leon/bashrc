@@ -1,0 +1,2 @@
+:: ECHO FOR \/F \"tokens=4 delims= \" \%\%P IN \(\'netstat -a -n -o \^\| findstr :$1\'\) DO TaskKill.exe /PID \%\%P > $batFileDosPath
+:: ECHO for \/f \"tokens=5\" \%\%a in \(\'netstat -aon \^\| find \":8080\" \^\| find \"LISTENING\"\'\) do taskkill \/f \/pid \%\%a $batFileDosPath

@@ -12,7 +12,7 @@ alias mvn.version=$aliases/mvn.project-version.sh
 alias mvn.package=$aliases/mvn.package.sh
 alias pc.deploy=$aliases/package_cloud.deploy.sh
 alias kill-port=$aliases/kill-port.sh $1
-alias pycharm='C:/Program\ Files\ \(x86\)/JetBrains/PyCharm\ Community\ Edition\ 2022.1.2/bin/pycharm64.exe' $1
+alias pycharm='$aliases/pycharm.sh' $1
 alias gitbash='$aliases/gitbash.sh & exit'
 
 alias

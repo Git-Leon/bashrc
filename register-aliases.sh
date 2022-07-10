@@ -29,5 +29,6 @@ alias restart-process='$aliases/restart-process.sh'
 alias convert-path='$aliases/convert-path.sh' $1
 alias find-replace='$aliases/find-replace.sh' $1 $2 $3
 alias get-gitignore='$aliases/generate-gitignore.sh'
+alias restart-discord='$aliases/restart-discord.sh'
 
 alias

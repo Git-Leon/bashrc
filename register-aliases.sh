@@ -28,6 +28,7 @@ alias node='winpty node.exe'
 alias pc.deploy='$aliases/package_cloud.deploy.sh'
 alias php='winpty php.exe'
 alias pycharm='C:/Program\ Files\ \(x86\)/JetBrains/PyCharm\ Community\ Edition\ 2022.1.2/bin/pycharm64.exe'
+alias unjar='$aliases/unjar-to-java.sh $1'
 alias restart-discord='$aliases/restart-discord.sh'
 alias restart-process='$aliases/restart-process.sh'
 

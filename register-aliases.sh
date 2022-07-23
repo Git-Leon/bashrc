@@ -1,6 +1,7 @@
 #!/bin/bash
 ECHO Registering aliases...
 aliases=~/bashrc/aliases
+bash='C:/WINDOWS/System32/bash.exe'
 
 alias cd='. $aliases/change-directory.sh $1'
 alias cd-temp='. $aliases/change-directory.sh ~/dev/.tmp'
@@ -20,7 +21,7 @@ alias git-reset='$aliases/git-reset.sh'
 alias gitbash='$aliases/gitbash.sh & exit'
 alias idea='$aliases/idea.sh'
 alias kill-bloat='$aliases/kill-bloat.sh'
-alias kill-port='$aliases/kill-port.sh'
+alias kill-port='$bash $aliases/kill-port.sh $1'
 alias kill-process='$aliases/kill-process.sh'
 alias ll='ls -la --color=auto'
 alias ls='ls -F --color=auto --show-control-chars'

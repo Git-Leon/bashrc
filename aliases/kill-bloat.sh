@@ -1,4 +1,6 @@
 killScript=$HOME/bashrc/aliases/kill-process.sh  
+$killScript explorer.exe
+start explorer.exe
 
 $killScript "code.exe"
 $killScript "discord.exe"

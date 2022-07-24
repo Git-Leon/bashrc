@@ -10,3 +10,4 @@ ESCAPED_KEYWORD=$(printf '%s\n' "$findValue" | sed -e 's/[]\/$*.^[]/\\&/g');
 
 sed -i -e "s+$findValue+$replaceValue+g" $tmpFile
 sed "s/$ESCAPED_KEYWORD/$ESCAPED_REPLACE/g" $tmpFile
+rm $tmpFile

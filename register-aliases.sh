@@ -2,15 +2,16 @@
 ECHO Registering aliases...
 aliases=~/bashrc/aliases
 
+alias=bashrc-update='$aliases/update.sh'
 alias cd='. $aliases/change-directory.sh $1'
 alias cd-temp='. $aliases/change-directory.sh ~/dev/.tmp'
 alias convert-path='$aliases/convert-path.sh'
 alias create-project.python='$aliases/create-project.python.sh'
 alias find-replace='$aliases/find-replace.sh'
-alias generate-gitignore='/c/Users/hunte/bashrc/aliases/get-gitignore.sh'
+alias generate-gitignore='$aliases/get-gitignore.sh'
 alias get-gitignore='$aliases/generate-gitignore.sh'
 alias get-process='$aliases/get-process.sh'
-alias git-acp='~/bashrc/aliases/git-acp.sh'
+alias git-acp='$aliases/git-acp.sh'
 alias git-fall='$aliases/git-fetch-all.sh'
 alias git-ignore='$aliases/git-ignore.sh'
 alias git-reset='$aliases/git-reset.sh'

@@ -2,6 +2,7 @@
 ECHO Registering aliases...
 aliases=~/bashrc/aliases
 
+alias bash='C:/Windows/System32/bash.exe'
 alias cd='. $aliases/change-directory.sh $1'
 alias cd-temp='. $aliases/change-directory.sh ~/dev/.tmp'
 alias convert-path='$aliases/convert-path.sh'

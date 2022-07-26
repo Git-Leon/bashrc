@@ -1,11 +1,14 @@
 #!/bin/bash
 if [ "$1" ]
   then
+    portNumbers=$(netstat -a -n -b -o | grep $1 | sed -e "s/[[:space:]]\+/ /g" | cut -d ' ' -f6)        
     { #try 
-        kill -9 $(lsof -t -i:$1) 2>/dev/null
+        for portNumber in $portNumbers; do
+          taskkill /PID /F "$portNumber" 2>/dev/null
+        done 
     } || { # catch
-        script=$HOME/bashrc/aliases/batch/kill-port.bat
-        cmd "/C $($HOME/bashrc/aliases/convert-path.sh $script) $1"
+        for portNumber in $portNumbers; do
+          taskkill //F //PID "$portNumber"
+        done 
     }
 fi
-

@@ -2,7 +2,11 @@
 ECHO Registering aliases...
 aliases=~/bashrc/aliases
 
+<<<<<<< HEAD
 alias bash='C:/Windows/System32/bash.exe'
+=======
+alias=bashrc-update='$aliases/update.sh'
+>>>>>>> e2dae401ce046780ee04049752a4ee76ee6ba442
 alias cd='. $aliases/change-directory.sh $1'
 alias cd-temp='. $aliases/change-directory.sh ~/dev/.tmp'
 alias convert-path='$aliases/convert-path.sh'

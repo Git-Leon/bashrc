@@ -1,9 +1,12 @@
 killScript=$HOME/bashrc/aliases/kill-process.sh  
 
+
 $killScript code.exe
 $killScript notepad++.exe
 $killScript discord.exe
 $killScript mspaint.exe
+$killScript idea64.exe
+$killScript java.exe
 
 $killScript "LITSSvc.exe"
 $killScript "ibmpmsvc.exe"

@@ -6,6 +6,6 @@ if [ "$1" ]
     git stash
     git reset --hard
     git fetch --all
-    git pull --all
+    git pull --ff-only
     git branch
 fi

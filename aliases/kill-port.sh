@@ -1,24 +1,19 @@
 #!/bin/bash
-killPort() {
-  if [ "$1" ]
-    then
-    echo "Attempting to kill process on $1"
-      processIds=$(netstat -a -n -b -o | grep $1 | sed -e "s/[[:space:]]\+/ /g" | cut -d ' ' -f6)
-      for processId in $processIds; do
-        { #try 
-          echo "Attempting to kill process on $1, using BASH syntax"
-          taskkill /PID /F "$processId" 2>null
+if [ "$1" ]
+  then
+    portNumbers=$(netstat -a -n -b -o | grep $1 | sed -e "s/[[:space:]]\+/ /g" | cut -d ' ' -f6)        
+    echo "Attempting to kill process running port number $1"
+    for portNumber in $portNumbers; do
+      { #try 
+          echo "Attempting to kill process running port number $1 using CYGWIN syntax"
+            taskkill //F //PID "$portNumber"
           echo "Process on $1 killed."
-          return
-        } || { # catch
-          echo "Attempting to kill process on $1, using cygwin syntax"
-          taskkill //F //PID "$processId"
+      } || { # catch
+          echo "Attempting to kill process running port number $1 using BASH syntax"        
+            taskkill /F /PID "$portNumber" 
           echo "Process on $1 killed."
-          return
-        }
-      done
-      echo "Process on $1 NOT killed."
-  fi
-}
-
-killPort $1
+      } || {
+          echo "Process on $1 NOT killed."
+      }
+    done 
+fi

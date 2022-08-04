@@ -1,5 +1,5 @@
-{ # try
+{ # linux and cygwin environment
     ls -F --color=auto --show-control-chars 2>/dev/null
-} || { #catch
+} || { # mac and unix environment
     ls -F -G 2>/dev/null
 }

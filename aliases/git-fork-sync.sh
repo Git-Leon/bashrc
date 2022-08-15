@@ -4,7 +4,7 @@ repoName="$(basename "${urlWithoutSuffix}")"
 hostName="$(basename "${urlWithoutSuffix%/${repoName}}")"
 
 git pull $url
-git remote add t$hostName git@github.com:$hostName/$repoName.git
+git remote add $hostName git@github.com:$hostName/$repoName.git
 git fetch $hostName
 
 git branch -r | grep -v '\->' |\

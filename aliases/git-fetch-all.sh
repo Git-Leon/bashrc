@@ -1,10 +1,7 @@
 #!/bin/bash
 git branch -r | grep -v '\->' |\
 while read remote; do
-    echo synching "${remote#origin/}" "$remote";
     git branch --track "${remote#origin/}" "$remote";
-
-    echo pulling "${remote#origin/}" "$remote";
     git pull
 done
 git fetch --all

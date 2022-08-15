@@ -3,6 +3,6 @@
 
 ```bash
 git clone https://github.com/Git-Leon/bashrc ~/bashrc
-chmod -R u+x ~/bashrc/install.sh
+chmod u+x ~/bashrc/install.sh
 ~/bashrc/install.sh
 ```

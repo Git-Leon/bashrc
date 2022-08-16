@@ -5,4 +5,4 @@ git reset --hard
 git fetch --all
 git pull --ff-only
 git branch
-source ~/.bashrc
+./install.sh

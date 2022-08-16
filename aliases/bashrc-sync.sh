@@ -1,4 +1,4 @@
 #!/bin/bash
 cd ~/bashrc
-./git-reset.sh
+./aliases/git-reset.sh
 ./install.sh

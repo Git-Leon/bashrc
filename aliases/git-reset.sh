@@ -8,4 +8,4 @@ if [ "$1" ]
     git fetch --all
     git pull --ff-only
     git branch
-fi
+fi 

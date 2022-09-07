@@ -1,1 +1,1 @@
-'C:/Program Files/Git/git-bash.exe'
+'/git-bash.exe'

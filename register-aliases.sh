@@ -2,7 +2,7 @@
 ECHO Registering aliases...
 aliases=~/bashrc/aliases
 
-alias bashrc-update='$aliases/update.sh'
+alias bashrc-update='$aliases/bashrc-update.sh'
 alias cd='. $aliases/change-directory.sh $1'
 alias cd-temp='. $aliases/change-directory.sh ~/dev/.tmp'
 alias convert-path='$aliases/convert-path.sh'

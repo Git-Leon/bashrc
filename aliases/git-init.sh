@@ -4,7 +4,6 @@ $SCRIPTPATH/get-gitignore.sh
 
 repoName=$1
 commitMessage="${@:2}"
-echo $commitMessage
 
 git init
 git add .

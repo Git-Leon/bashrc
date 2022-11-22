@@ -3,6 +3,7 @@ ECHO Registering aliases...
 aliases=~/bashrc/aliases
 
 alias bashrc-update='$aliases/bashrc-update.sh'
+alias bashrc-edit='$aliases/bashrc-edit.sh'
 alias b64e='$aliases/b64e.sh $*'
 alias b64d='$aliases/b64d.sh $*'
 alias cd='. $aliases/change-directory.sh $1'

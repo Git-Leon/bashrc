@@ -1,4 +1,4 @@
-git config core.filemode false
+git config core.filemode true
 git add .
 git commit -m "$*"
 git push

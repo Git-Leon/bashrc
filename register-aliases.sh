@@ -55,5 +55,6 @@ alias unjar='$aliases/unjar-to-java.sh $1'
 alias restart-explorer='$aliases/restart-explorer.sh'
 alias restart-discord='$aliases/restart-discord.sh'
 alias restart-process='$aliases/restart-process.sh'
+alias toggle-clock='$aliases/toggle-clock.sh'
 
 alias

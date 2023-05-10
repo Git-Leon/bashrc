@@ -52,6 +52,7 @@ alias php='winpty php.exe'
 alias pycharm='C:/Program\ Files\ \(x86\)/JetBrains/PyCharm\ Community\ Edition\ 2022.1.2/bin/pycharm64.exe'
 alias pyserve='$aliases/pyserve.sh $1'
 alias unjar='$aliases/unjar-to-java.sh $1'
+alias restart-explorer='$aliases/restart-explorer.sh'
 alias restart-discord='$aliases/restart-discord.sh'
 alias restart-process='$aliases/restart-process.sh'
 

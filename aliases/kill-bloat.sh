@@ -1,6 +1,7 @@
 killScript=$HOME/bashrc/aliases/kill-process.sh  
 
-
+$killScript explorer
+start explorer.exe &
 $killScript code
 $killScript notepad++
 $killScript discord
@@ -18,8 +19,6 @@ $killScript "Lenovo.Modern.ImController.PluginHost"
 $killScript "Lenovo.Modern.ImController.PluginHost.Device"
 $killScript "Lenovo.Modern.ImController.PluginHost.SettingsApp"
 $killScript "Zoom"
-$killScript "Descript"
-$killScript "Recut"
 
 # Webex
 $killScript "CiscoCollabHost"

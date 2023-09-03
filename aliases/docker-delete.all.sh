@@ -5,7 +5,6 @@ else
     true
 fi
 
-&&
 
 if [[ $(docker ps -aq) ]]
     then

@@ -4,6 +4,7 @@ ECHO Registering aliases...
 aliases=~/bashrc/aliases
 
 alias bashrc-update='$aliases/bashrc-update.sh'
+alias bashrc-refresh='$aliases/bashrc-refresh.sh'
 alias bashrc-edit='$aliases/bashrc-edit.sh'
 alias b64e='$aliases/b64e.sh $*'
 alias b64d='$aliases/b64d.sh $*'
@@ -15,6 +16,9 @@ alias create-project.maven='$aliases/create-project.maven.sh'
 alias create-project.js='$aliases/create-project.js.sh'
 alias create-project.spring='$aliases/create-project.spring.sh'
 alias deldir='$aliases/deldir.sh $1'
+alias docker-delete='$aliases/docker-delete.sh $1'
+alias docker-delete.all='$aliases/docker-delete.all.sh $1'
+alias docker-restart='$aliases/docker-restart.sh $1'
 alias find-replace='$aliases/find-replace.sh'
 alias get-gitignore='$aliases/get-gitignore.sh'
 alias get-process='$aliases/get-process.sh'

@@ -13,4 +13,4 @@ else
     true
 fi
 
-sudo service docker restart
+service docker restart

@@ -5,4 +5,7 @@ if [ "$1" ]
         git clone https://github.com/cymatic-productions/mixcraft.projecttemplate $1
         cd $1
         rm -rf .git
+        mv track-render.mp3 $1.mp3
+        mv project/project.mx8 project/$1.mx8
+        mv project/project-render.mx8 project/$1.mx8
 fi

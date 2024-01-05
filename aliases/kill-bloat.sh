@@ -8,6 +8,12 @@ $killScript discord
 $killScript mspaint
 $killScript idea64
 $killScript java
+$killScript firefox
+$killScript chrome
+$killScript msedge
+$killScript opera
+$killScript Audacity
+$killScript GameBar
 
 $killScript "LITSSvc"
 $killScript "ibmpmsvc"

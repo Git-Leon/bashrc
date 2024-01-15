@@ -1,2 +1,2 @@
 #!/bin/bash
-pwd | cygpath -w -f - | clip
+pwd | cygpath -w -f - | tr '\\' '/' | clip

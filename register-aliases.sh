@@ -66,5 +66,4 @@ alias restart-explorer='$aliases/restart-explorer.sh'
 alias restart-discord='$aliases/restart-discord.sh'
 alias restart-process='$aliases/restart-process.sh'
 alias toggle-clock='$aliases/toggle-clock.sh'
-
-aliasalias pwd.windows='/c/Users/Computer/bashrc/aliases/pwd.windows.sh $@'
+alias cwd='/c/Users/Computer/bashrc/aliases/cwd.sh $@'

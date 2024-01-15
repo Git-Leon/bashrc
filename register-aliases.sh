@@ -54,6 +54,7 @@ alias ll='ls -la --color=auto'
 alias ls='$aliases/ls.sh $*'
 alias mvn.package='$aliases/mvn.package.sh'
 alias mvn.version='$aliases/mvn.project-version.sh'
+alias new-alias='$aliases/new-alias.sh $1'
 alias node='winpty node.exe $1'
 alias npp='notepad++ $1'
 alias pc.deploy='$aliases/package_cloud.deploy.sh'
@@ -66,4 +67,4 @@ alias restart-discord='$aliases/restart-discord.sh'
 alias restart-process='$aliases/restart-process.sh'
 alias toggle-clock='$aliases/toggle-clock.sh'
 
-alias
+aliasalias pwd.windows='/c/Users/Computer/bashrc/aliases/pwd.windows.sh $@'

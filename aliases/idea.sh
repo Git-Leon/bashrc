@@ -1,1 +1,1 @@
-"C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.3\bin\idea64.exe" $1
+"C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2022.3.2\bin\idea64.exe" $1

@@ -1,0 +1,1 @@
+powershell $HOME/bashrc/aliases/powershell/choco-install.ps1 $1

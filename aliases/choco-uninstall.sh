@@ -1,0 +1,1 @@
+powershell $HOME/bashrc/aliases/powershell/choco-uninstall.ps1 $1

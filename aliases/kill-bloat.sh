@@ -3,6 +3,7 @@ killScript=$HOME/bashrc/aliases/kill-process.sh
 $killScript explorer
 start explorer.exe &
 $killScript code
+$killScript cursor
 $killScript notepad++
 $killScript discord
 $killScript mspaint
@@ -14,6 +15,11 @@ $killScript msedge
 $killScript opera
 $killScript Audacity
 $killScript GameBar
+$killScript obs64
+$killScript steam
+$killScript "Splitter Studio"
+
+
 
 $killScript "LITSSvc"
 $killScript "ibmpmsvc"
@@ -40,4 +46,5 @@ $killScript "Receiver"
 $killScript "CDViewer"
 
 # start "gitbash" "C:/Program Files/Git/git-bash"
+$killScript ConEmu64
 $killScript bash

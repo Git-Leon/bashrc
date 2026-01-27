@@ -1,0 +1,1 @@
+powershell $HOME/bashrc/aliases/powershell/check-ram-usage.ps1 $1

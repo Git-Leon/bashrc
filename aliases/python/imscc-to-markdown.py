@@ -16,13 +16,24 @@ Usage:
 
 import os
 import re
+import sys
 import xml.etree.ElementTree as ET
 from html.parser import HTMLParser
 from html import unescape
 
+
+def long_path(p):
+    """Prefix a path with \\\\?\\ on Windows to bypass the 260-char limit."""
+    if sys.platform == 'win32':
+        ap = os.path.abspath(p)
+        if not ap.startswith('\\\\?\\'):
+            return '\\\\?\\' + ap
+        return ap
+    return p
+
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-# Use a relative output path to avoid Windows 260-char path limit.
-# The bash wrapper always cd's into BASE_DIR before running this script.
+# Use a relative output path; long_path() handles the 260-char Windows limit.
 OUTPUT_DIR = os.path.join(".", "content")
 
 # ── HTML to Markdown converter ──────────────────────────────────────────
@@ -166,7 +177,7 @@ NS = {
 
 def parse_manifest():
     """Parse imsmanifest.xml, return modules and resource map."""
-    tree = ET.parse(os.path.join(BASE_DIR, 'imsmanifest.xml'))
+    tree = ET.parse(long_path(os.path.join(BASE_DIR, 'imsmanifest.xml')))
     root = tree.getroot()
 
     # Build resource map: identifier -> resource element
@@ -228,7 +239,7 @@ def parse_manifest():
 def read_xml_topic(filepath):
     """Read a topic XML file (imsdt), return title and HTML text."""
     try:
-        tree = ET.parse(filepath)
+        tree = ET.parse(long_path(filepath))
         root = tree.getroot()
         # Handle namespace
         ns = {'dt': 'http://www.imsglobal.org/xsd/imsccv1p1/imsdt_v1p1'}
@@ -244,7 +255,7 @@ def read_xml_topic(filepath):
 def read_weblink(filepath):
     """Read a webLink XML file, return title and URL."""
     try:
-        tree = ET.parse(filepath)
+        tree = ET.parse(long_path(filepath))
         root = tree.getroot()
         ns = {'wl': 'http://www.imsglobal.org/xsd/imsccv1p1/imswl_v1p1'}
         title_el = root.find('wl:title', ns)
@@ -259,7 +270,7 @@ def read_weblink(filepath):
 def read_html_assignment(filepath):
     """Read an assignment HTML file, return title and body HTML."""
     try:
-        with open(filepath, 'r', encoding='utf-8') as f:
+        with open(long_path(filepath), 'r', encoding='utf-8') as f:
             content = f.read()
         # Extract title
         title_match = re.search(r'<title>(.*?)</title>', content, re.DOTALL)
@@ -278,7 +289,7 @@ def read_quiz_meta(quiz_dir):
     """Read quiz assessment_meta.xml, return title and description."""
     meta_path = os.path.join(quiz_dir, 'assessment_meta.xml')
     try:
-        tree = ET.parse(meta_path)
+        tree = ET.parse(long_path(meta_path))
         root = tree.getroot()
         ns = {'q': 'http://canvas.instructure.com/xsd/cccv1p0'}
         title_el = root.find('q:title', ns)
@@ -356,7 +367,7 @@ def classify_item(title, resource_type, href, module_title=''):
     resource_dir = os.path.dirname(href) if href else ''
     if resource_dir:
         settings_path = os.path.join(BASE_DIR, resource_dir, 'assignment_settings.xml')
-        if os.path.exists(settings_path):
+        if os.path.exists(long_path(settings_path)):
             return 'assignment'
 
     # Keyword-based classification
@@ -453,7 +464,7 @@ def process_resource(item_title, identifierref, resources, module_title=''):
     # ── Discussion Topic (imsdt_xmlv1p1) - XML with <topic> ──
     if 'imsdt' in res_type:
         xml_path = os.path.join(BASE_DIR, f'{identifierref}.xml')
-        if os.path.exists(xml_path):
+        if os.path.exists(long_path(xml_path)):
             topic_title, topic_html = read_xml_topic(xml_path)
             title = topic_title or item_title
             desc_md, links = html_to_markdown(topic_html)
@@ -465,7 +476,7 @@ def process_resource(item_title, identifierref, resources, module_title=''):
     # ── Assignment / learning-application-resource with HTML ──
     if res_href and res_href.endswith('.html'):
         html_path = os.path.join(BASE_DIR, res_href)
-        if os.path.exists(html_path):
+        if os.path.exists(long_path(html_path)):
             html_title, html_body = read_html_assignment(html_path)
             title = html_title or item_title
             desc_md, links = html_to_markdown(html_body)
@@ -476,7 +487,7 @@ def process_resource(item_title, identifierref, resources, module_title=''):
 
     # ── Fallback: try reading the XML directly ──
     xml_path = os.path.join(BASE_DIR, f'{identifierref}.xml')
-    if os.path.exists(xml_path):
+    if os.path.exists(long_path(xml_path)):
         topic_title, topic_html = read_xml_topic(xml_path)
         title = topic_title or item_title
         desc_md, links = html_to_markdown(topic_html)
@@ -497,7 +508,7 @@ def main():
 
     # Create output directories
     for d in ['assignments', 'pages', 'quizzes', 'external', 'projects', 'discussions']:
-        os.makedirs(os.path.join(OUTPUT_DIR, d), exist_ok=True)
+        os.makedirs(long_path(os.path.join(OUTPUT_DIR, d)), exist_ok=True)
 
     # Create module index
     module_index_lines = ['---', 'type: page', 'title: "Course Module Index"', 'source: "canvas-import"', '---', '', '# Public Course - Full Stack Java Microservice', '', '## Module Index', '']
@@ -551,8 +562,8 @@ def main():
             filepath = os.path.join(OUTPUT_DIR, dir_name, f'{slug}.md')
 
             # Don't overwrite duplicate exact file
-            if not os.path.exists(filepath):
-                with open(filepath, 'w', encoding='utf-8') as f:
+            if not os.path.exists(long_path(filepath)):
+                with open(long_path(filepath), 'w', encoding='utf-8') as f:
                     f.write(markdown_content)
                 created_files.append(filepath)
 
@@ -564,7 +575,7 @@ def main():
 
     # Write module index
     index_path = os.path.join(OUTPUT_DIR, 'index.md')
-    with open(index_path, 'w', encoding='utf-8') as f:
+    with open(long_path(index_path), 'w', encoding='utf-8') as f:
         f.write('\n'.join(module_index_lines))
     created_files.append(index_path)
 

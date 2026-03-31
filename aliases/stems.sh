@@ -18,12 +18,21 @@ NAME="${BASENAME%.*}"
 BASEDIR="$(cd "$(dirname "$FILE")" && pwd)"
 OUTDIR="${BASEDIR}/${NAME}.stems"
 
-# Exit if destination exists
+# Exit if destination exists (prompt to delete)
 if [ -d "$OUTDIR" ]; then
   echo "❌ Output directory already exists:"
   echo "   $OUTDIR"
-  echo "Refusing to overwrite. Delete it or choose a different input."
-  exit 2
+  read -r -p "Delete it and continue? [y/N] " ans
+  case "$ans" in
+    [yY]|[yY][eE][sS])
+      echo "Removing: $OUTDIR"
+      rm -rf -- "$OUTDIR"
+      ;;
+    *)
+      echo "Aborting. Delete the directory manually or choose a different input."
+      exit 2
+      ;;
+  esac
 fi
 
 # --- Helper: ensure pip packages exist ---
@@ -46,9 +55,16 @@ ensure_pkg torch 2.4.1
 ensure_pkg torchaudio 2.4.1
 ensure_pkg soundfile
 ensure_pkg demucs
+# NOTE: do NOT auto-install torchcodec here. Installing torchcodec without
+# the matching full-shared FFmpeg DLLs (and compatible torch/torchcodec)
+# causes libtorchcodec load errors on Windows. Install it manually only if
+# you have FFmpeg full-shared and a matching torchcodec build.
 
 echo "🎵 Separating stems for: $FILE"
-python -m demucs --out "$OUTDIR" "$FILE"
+
+# Use Python wrapper to force soundfile backend and avoid TorchCodec/FFmpeg DLL errors.
+# The wrapper patches torchaudio.save before running demucs.
+python "$HOME/bashrc/aliases/python/demucs-wrapper.py" --out "$OUTDIR" "$FILE"
 
 # --- Flatten directory structure (model-agnostic) ---
 # Expect: $OUTDIR/<model>/<song>/*.wav  → move into $OUTDIR
@@ -92,11 +108,11 @@ cd "$OUTDIR"
 
 # Map Demucs names -> your desired names
 declare -A MAP=(
-  ["vocals"]="vocal"
-  ["drums"]="drum"
-  ["bass"]="bass"
-  ["other"]="other"
-  ["accompaniment"]="instrumental"  # if you ever use 2-stem
+	[vocals]="vocal"
+	[drums]="drum"
+	[bass]="bass"
+	[other]="other"
+	[accompaniment]="instrumental"
 )
 
 shopt -s nullglob nocaseglob

@@ -68,9 +68,11 @@ processes=(
 	"LogitechGHub"
 	"LogiOverlay"
 	"IntelDriverUpdateService"
-	StartMenuExperienceHost
-	SearchHost
-	TextInputHost
+	"StartMenuExperienceHost"
+	"SearchHost"
+	"ShellExperienceHost"
+	"TextInputHost"
+	"PhoneExperienceHost"
 	
 	"ConEmu64"
 	"bash"

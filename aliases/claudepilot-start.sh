@@ -20,11 +20,11 @@ set -euo pipefail
 # Claude Code CLI. Use --foreground as first arg to run the MCP server in the
 # foreground instead.
 
+
 DEFAULT_DIRS=(
   "${CLAUDE_CODE_DIR:-}"
   "/c/Users/Computer/dev/claude-code-bootstrap/claude-code"
   "$HOME/dev/claude-code-bootstrap/claude-code"
-  "$(pwd)/../dev/claude-code-bootstrap/claude-code"
 )
 
 FOREGROUND=0
@@ -33,11 +33,9 @@ if [ "${1:-}" = "--foreground" ]; then
   shift || true
 fi
 
-# Parse optional positional dir and "--" separator for CLI args
 ARG_DIR=""
 CLI_ARGS=()
 if [ "${1:-}" = "--" ]; then
-  # No dir given, just CLI args
   shift || true
   CLI_ARGS=("$@")
 elif [ -n "${1:-}" ]; then
@@ -61,7 +59,6 @@ find_claude_dir() {
       return
     fi
   done
-  # last resort: look for a nearby folder named claude-code
   if [ -d "./claude-code" ]; then
     echo "$(pwd)/claude-code"
     return
@@ -85,12 +82,9 @@ fi
 
 cd "$MCP_DIR"
 
-start_cmd=""
-# Prefer a built HTTP entrypoint if present
 if [ -f "dist/src/http.js" ]; then
   start_cmd="node dist/src/http.js"
 elif [ -f "src/index.ts" ]; then
-  # dev entrypoint
   start_cmd="npx tsx src/index.ts"
 elif grep -q "start:http" package.json 2>/dev/null; then
   start_cmd="npm run start:http"
@@ -100,7 +94,6 @@ fi
 
 if [ "$FOREGROUND" -eq 1 ]; then
   echo "Running claude MCP server in foreground: $start_cmd"
-  # run in foreground and in parallel wait for the health endpoint
   sh -c "$start_cmd" &
   SERVER_PID=$!
   echo "Server PID: $SERVER_PID"
@@ -135,7 +128,6 @@ curl -Ssf "$CURL_URL" || exit $?
 echo
 echo "MCP server ready (PID: $SERVER_PID)."
 
-# ── Launch the Claude Code CLI ──────────────────────────────────────
 if [ "${CLAUDE_NO_CLI:-0}" = "1" ]; then
   echo "CLAUDE_NO_CLI=1 — skipping CLI launch."
   echo "To stop the background server: kill $SERVER_PID"
@@ -144,10 +136,13 @@ fi
 
 cd "$CLAUDE_DIR"
 
-# Use bun dev runner (works without a production build)
 if command -v bun >/dev/null 2>&1 && [ -f "scripts/dev.ts" ]; then
   echo "Launching Claude Code CLI via: bun scripts/dev.ts ${CLI_ARGS[*]:-}"
-  exec bun scripts/dev.ts "${CLI_ARGS[@]}"
+  if [ -t 0 ]; then
+    exec bun scripts/dev.ts "${CLI_ARGS[@]}"
+  else
+    exec bun scripts/dev.ts "${CLI_ARGS[@]}" < /dev/null
+  fi
 else
   echo "bun not found or scripts/dev.ts missing — cannot launch CLI." >&2
   echo "Install bun (https://bun.sh) or run from the claude-code directory manually." >&2

@@ -3,12 +3,14 @@ SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 ECHO Registering aliases...
 aliases=~/bashrc/aliases
 
+echo hey world
 alias bashrc-update='$aliases/bashrc-update.sh'
 alias bashrc-refresh='$aliases/bashrc-refresh.sh'
 alias bashrc-edit='$aliases/bashrc-edit.sh'
 alias b64e='$aliases/b64e.sh $*'
 alias b64d='$aliases/b64d.sh $*'
 alias capcut='. $aliases/capcut.sh $1'
+alias claude-start='$aliases/claude.start.sh'
 alias color-echo='. $aliases/color-echo.sh $1'
 alias cd='. $aliases/change-directory.sh $1'
 alias cd-temp='. $aliases/change-directory.sh ~/dev/.tmp'
